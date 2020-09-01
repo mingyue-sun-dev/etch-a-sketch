@@ -16,15 +16,11 @@
 	<script type="text/javascript">
 		const clear = document.querySelector('#clear');
 		const resize = document.querySelector('#resize');
-		createGrid(16);
-		sketch();
-		clearGrid();
+		completeSketch(16);
 
 		resize.addEventListener('click', function() {
 			const squaresPerSide = prompt('How many squares per side?');
-			createGrid(squaresPerSide);
-			sketch();
-			clearGrid();
+			completeSketch(squaresPerSide);
 		});
 
 		function createGrid(squaresPerSide) {
@@ -50,6 +46,12 @@
 			clear.addEventListener('click', function() {
 				squares.forEach(square => square.classList.remove('hover'));
 			});
+		}
+
+		function completeSketch(squaresPerSide) {
+			createGrid(squaresPerSide);
+			sketch();
+			clearGrid();
 		}
 	</script>
 </body>
