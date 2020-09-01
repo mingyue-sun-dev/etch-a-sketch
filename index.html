@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>etch a sketch</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div id='button-container'>
+		<button id='clear'>Clear</button>
+		<button id='resize'>Resize</button>
+	</div>
+
+	<div id="container"></div>
+
+	<script   src="https://code.jquery.com/jquery-3.5.1.js"   integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="   crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		const clear = document.querySelector('#clear');
+		const resize = document.querySelector('#resize');
+		createGrid(16);
+		sketch();
+		clearGrid();
+
+		resize.addEventListener('click', function() {
+			const squaresPerSide = prompt('How many squares per side?');
+			createGrid(squaresPerSide);
+			sketch();
+			clearGrid();
+		});
+
+		function createGrid(squaresPerSide) {
+			const grid = document.querySelector('#container');
+			while (grid.firstChild) {
+				grid.removeChild(grid.firstChild);
+			}
+			for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
+				const square = document.createElement('div');
+				grid.appendChild(square);
+			}
+			grid.style.gridTemplateColumns = `repeat(${squaresPerSide}, 1fr)`;
+		}
+
+		function sketch() {
+			$("#container div").on('mouseover',function() {
+			    $(this).addClass('hover');
+			});
+		}
+
+		function clearGrid() {
+			const squares = document.querySelectorAll('#container div');
+			clear.addEventListener('click', function() {
+				squares.forEach(square => square.classList.remove('hover'));
+			});
+		}
+	</script>
+</body>
+</html>
